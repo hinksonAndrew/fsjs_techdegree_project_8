@@ -1,3 +1,5 @@
+const createError = require('http-errors');
+
 /**
  * Error Handlers - 404 and Global
  */
@@ -10,10 +12,12 @@ const handleFourOhFour = (req, res, next) => {
 }
 
 const handleGlobalError = (err, req, res, next) => {
+  console.log('hello');
   err.status = err.status || 500;
   err.message = err.message || "Sorry! There was an unexpected error on the server.";
   console.log('Status:', err.status,'Message:', err.message);
-  res.render('error', {err});
+  //res.render('error', {err});
+  return err;
 }
 
 module.exports = {handleFourOhFour, handleGlobalError};

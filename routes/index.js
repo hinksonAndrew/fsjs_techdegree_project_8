@@ -25,16 +25,19 @@ router.get('/books', asyncHandler(async (req, res) => {
 }));
 
 /* GET add new book form */
-router.get('/books/new', asyncHandler(async(req, res) => {
+router.get('/books/new', (req, res) => {
   res.render('new-book', {book: {}, title: "New Book"});
+});
+
+router.post('/books/new', asyncHandler(async(req, res) => {
+  const book = await Book.create(req.body);
+  res.redirect("/books/" + book.id);
 }));
 
-router.post('/books/new');
+//router.get('/books/:id');
 
-router.get('/books/:id');
+//router.post('/books/:id');
 
-router.post('/books/:id');
-
-router.post('/books/:id/delete');
+//router.post('/books/:id/delete');
 
 module.exports = router;

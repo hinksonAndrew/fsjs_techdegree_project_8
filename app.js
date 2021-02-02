@@ -7,7 +7,6 @@ var logger = require('morgan');
 const {sequelize} = require("./models");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 // Import error handlers
 const errorHandlers = require('./errorHandlers');
@@ -36,22 +35,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// // catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//   next(createError(404, 'This page does not exist!'));
-// });
-
-// // error handler
-// app.use((err, req, res, next) => {
-//   if (err.status === 404) {
-//     res.status(404).render('error', {err});
-//   } else {
-//     err.message = err.message || 'Oops! It looks like something went wrong on the server.';
-//     res.status(err.status || 500).render('error', {err});
-//   }
-// });
 
 app.use(errorHandlers.handleFourOhFour);
 app.use(errorHandlers.handleGlobalError);

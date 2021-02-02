@@ -2,20 +2,18 @@
  * Error Handlers - 404 and Global
  */
 const handleFourOhFour = (req, res, next) => {
-  const err = new Error('err');
+  const err = new Error();
   err.status = 404;
-  err.message = 'Oops, page not found. Looks like that route does not exist.';
-  res.render('error', {err});
+  err.message = "Sorry! We couldn't find the page you were looking for.";
+  res.render('page-not-found', {err , title:"Page Not Found"});
   next(err);
 }
 
 const handleGlobalError = (err, req, res, next) => {
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // res.status(err.status || 500);
-  // res.send(err.message);
-  // res.render('error');
-  
+  err.status = err.status || 500;
+  err.message = err.message || "Sorry! There was an unexpected error on the server.";
+  console.log('Status:', err.status,'Message:', err.message);
+  res.render('error', {err});
 }
 
 module.exports = {handleFourOhFour, handleGlobalError};

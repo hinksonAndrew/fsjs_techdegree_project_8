@@ -14,11 +14,27 @@ function asyncHandler(cb) {
 }
 
 /* GET home page. */
-router.get('/', asyncHandler(async (req, res, next) => {
-  const books = await Book.findAll();
-  // res.json(books);
-  // console.log(books.map(book=>book.toJSON()));
-  res.render('index', { title: 'Express' });
+router.get('/', asyncHandler(async (req, res) => {
+  res.redirect('/books');
 }));
+
+/* GET books listing */
+router.get('/books', asyncHandler(async (req, res) => {
+  const books = await Book.findAll();
+  res.render('index', {books, title:'Books'});
+}));
+
+/* GET add new book form */
+router.get('/books/new', asyncHandler(async(req, res) => {
+  res.render('new-book', {book: {}, title: "New Book"});
+}));
+
+router.post('/books/new');
+
+router.get('/books/:id');
+
+router.post('/books/:id');
+
+router.post('/books/:id/delete');
 
 module.exports = router;

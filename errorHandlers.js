@@ -15,7 +15,6 @@ const handleGlobalError = (err, req, res, next) => {
   if (err.status === 404) {
     res.render('page-not-found', {err , title:"Page Not Found"});
   }
-  console.log('hello');
   err.status = err.status || 500;
   err.message = err.message || "Sorry! There was an unexpected error on the server.";
   console.log('Status:', err.status,'Message:', err.message);

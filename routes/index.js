@@ -34,7 +34,10 @@ router.post('/books/new', asyncHandler(async(req, res) => {
   res.redirect("/books/" + book.id);
 }));
 
-//router.get('/books/:id');
+router.get('/books/:id', asyncHandler(async(req, res) => {
+  const book = await Book.findByPk(req.params.id);
+  res.render('update-book', {book, title: book.title});
+}));
 
 //router.post('/books/:id');
 

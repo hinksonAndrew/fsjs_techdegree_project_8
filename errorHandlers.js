@@ -8,15 +8,18 @@ const handleFourOhFour = (req, res, next) => {
   err.status = 404;
   err.message = "Sorry! We couldn't find the page you were looking for.";
   res.render('page-not-found', {err , title:"Page Not Found"});
-  next(err);
+  //next(err);
 }
 
 const handleGlobalError = (err, req, res, next) => {
+  if (err.status === 404) {
+    res.render('page-not-found', {err , title:"Page Not Found"});
+  }
   console.log('hello');
   err.status = err.status || 500;
   err.message = err.message || "Sorry! There was an unexpected error on the server.";
   console.log('Status:', err.status,'Message:', err.message);
-  //res.render('error', {err});
+  res.render('error', {err});
   return err;
 }
 

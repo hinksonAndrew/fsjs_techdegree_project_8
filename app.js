@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+// Error Handlers
 app.use(errorHandlers.handleFourOhFour);
 app.use(errorHandlers.handleGlobalError);
 
